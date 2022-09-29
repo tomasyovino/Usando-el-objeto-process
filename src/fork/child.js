@@ -1,7 +1,7 @@
 const challenge = (query) => {
     const array = [];
     if (query === undefined) {
-        for(let i = 0; i < 100000000; i++) {
+        for(let i = 0; i < 10; i++) {
             let randomNum = 1 + Math.floor(Math.random() * 1000);
             array.push(randomNum);
         }
@@ -10,15 +10,16 @@ const challenge = (query) => {
         for(let i = 0; i < query; i++) {
             let randomNum = 1 + Math.floor(Math.random() * 1000);
             array.push(randomNum);
-        }
+        };
         return array;
-    }
-}
+    };
+};
 
-process.on("randomizer", (msg) => {
-    console.log(msg)
-    if (msg == "start") {
-        const random = challenge();
+process.on("message", (quant) => {
+    console.log("first", quant)
+    if (quant) {
+        console.log("second", quant)
+        const random = challenge(quant);
         process.send(random);
     }
 });
