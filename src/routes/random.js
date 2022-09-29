@@ -6,9 +6,8 @@ const randomRouter = Router();
 randomRouter.get("/", (req, res) => {
     let { quant } = req.query;
     const child = fork("./src/fork/child.js");
-    child.send(quant);
+    child.send("start", quant);
     child.on("message", (random) => {
-        console.log(random);
         res.send(random);
     });
 });
